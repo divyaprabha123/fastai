@@ -48,9 +48,9 @@ class ConvnetBuilder():
         if custom_head: fc_layers = [custom_head]
         else: fc_layers = self.get_fc_layers()
         self.n_fc = len(fc_layers)
-        self.fc_model = to_gpu(nn.Sequential(*fc_layers))
+        self.fc_model = (nn.Sequential(*fc_layers))
         if not custom_head: apply_init(self.fc_model, kaiming_normal)
-        self.model = to_gpu(nn.Sequential(*(layers+fc_layers)))
+        self.model = (nn.Sequential(*(layers+fc_layers)))
 
     @property
     def name(self): return f'{self.f.__name__}_{self.xtra_cut}'
